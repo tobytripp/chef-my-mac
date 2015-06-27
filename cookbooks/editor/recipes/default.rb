@@ -6,13 +6,15 @@ package "emacs" do
   options "--with-cocoa"
 end
 
+home = node["editor"]["home"]
+
 bash "link emacs launchd config" do
   code <<-SH
-    ln -sfv /usr/local/opt/emacs/*.plist ~/Library/LaunchAgents
-    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.emacs.plist
+    ln -sfv /usr/local/opt/emacs/*.plist #{home}/Library/LaunchAgents
+    launchctl load #{home}/Library/LaunchAgents/homebrew.mxcl.emacs.plist
   SH
   not_if {
-    ::File.exist? "~/Library/LaunchAgents/homebrew.mxcl.emacs.plist"
+    ::File.exist? "#{home}/Library/LaunchAgents/homebrew.mxcl.emacs.plist"
   }
 end
 

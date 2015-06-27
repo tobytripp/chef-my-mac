@@ -2,6 +2,8 @@
   "run_list": [
     "recipe[shell]",
     "recipe[ruby]",
-    "recipe[editor]"
+    "recipe[editor]",
+    "recipe[apps]",
+    "recipe[vms]"
   ]
 }
