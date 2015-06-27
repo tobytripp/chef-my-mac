@@ -1,0 +1,19 @@
+* Provisioning my Mac with Chef
+
+** Install Chef
+
+      https://downloads.chef.io
+
+** Clone this repository
+
+   #+BEGIN_SRC sh
+   git clone git@github.com:tobytripp/chef-my-mac.git
+   #+END_SRC
+
+** Run the provisioner
+
+   Run the default Rake task:
+
+   #+BEGIN_SRC sh
+   rake
+   #+END_SRC

@@ -8,15 +8,17 @@ end
 
 home = node["editor"]["home"]
 
-bash "link emacs launchd config" do
-  code <<-SH
-    ln -sfv /usr/local/opt/emacs/*.plist #{home}/Library/LaunchAgents
-    launchctl load #{home}/Library/LaunchAgents/homebrew.mxcl.emacs.plist
-  SH
-  not_if {
-    ::File.exist? "#{home}/Library/LaunchAgents/homebrew.mxcl.emacs.plist"
-  }
+plist_file = "#{home}/Library/LaunchAgents/toby.emacs.plist"
+
+template plist_file do
+  source "toby.emacs.plist.erb"
 end
+
+bash "load emacs launchd config" do
+  code "launchctl load #{plist_file}"
+  not_if { ::File.exist? plist_file }
+end
+
 
 bash "linkapps" do
   code "brew linkapps emacs"
