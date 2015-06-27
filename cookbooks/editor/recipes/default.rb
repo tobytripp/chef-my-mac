@@ -20,3 +20,9 @@ bash "linkapps" do
   code "brew linkapps emacs"
   not_if { ::File.exist? "/Applications/Emacs.app" }
 end
+
+git "#{ENV["HOME"]}/.emacs.d" do
+  repository "git@github.com:tobytripp/emacs.d.git"
+  revision "master"
+  action :sync
+end
