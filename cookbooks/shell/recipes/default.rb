@@ -2,13 +2,18 @@
 # Cookbook Name:: shell
 # Recipe:: default
 #
-
-package "ag"
-package "zsh"
-package "tmux"
-package "mosh"
-
 home = ENV["HOME"]
+user = ENV["USER"]
+
+bash "Prepare for homebrew" do
+  code <<-SH
+    sudo mkdir -p /usr/local
+    sudo chown -R #{user}:staff /usr/local
+  SH
+  not_if { ::File.exist? "/usr/local" }
+end
+
+%w[ag zsh tmux mosh].each { |pkg| package pkg }
 
 keys = Chef::EncryptedDataBagItem.load("keys", "github")
 private_key = "#{home}/.ssh/github_rsa"
