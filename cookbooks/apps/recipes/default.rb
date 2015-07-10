@@ -8,6 +8,7 @@ package "brew-cask" do
 end
 
 %w[
+  alfred
   dropbox
   flux
   google-chrome
